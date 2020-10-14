@@ -1,0 +1,101 @@
+---
+title: "Tutorial"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+
+# Import packages
+library(pins)
+library(dplyr)
+library(learnr)
+library(gradethis)
+
+# Pull data
+board_register("https://raw.githubusercontent.com/predictcrypto/pins/master/","hitBTC_orderbooks_github")
+# Only use the latest 1,000 rows (feel free to remove this)
+hitBTC <- head(pin_get("hitBTC_orderbooks_github", "hitBTC_orderbooks_github"),1000)
+
+# Sort by latest data
+hitBTC <- arrange(hitBTC, desc(date_time_utc))
+
+# Setting for coding boxes
+tutorial_options(exercise.cap = "Execute Your R Code Below", exercise.checker = gradethis::grade_learnr)
+
+# Convert the ask price to numeric
+hitBTC$ask_1_price <- as.numeric(hitBTC$ask_1_price)
+```
+
+## First Example Topic
+
+### Exercise with Hint
+
+You can create guided examples with coded exercises! Try using the box below to return the first 5 rows of data using the function `head()` on the `hitBTC` object. Click on the "Hint" button if you need help.
+
+```{r firstExercise, exercise=TRUE, exercise.eval=TRUE}
+hitBTC
+```
+
+```{r firstExercise-hint}
+head(hitBTC)
+```
+
+```{r firstExercise-solution}
+head(hitBTC)
+```
+
+### Quiz
+
+You can even include quiz questions throughout the document. Do your best to answer the question below, or ask for a `Hint` by clicking on the button.
+
+**What is the latest price for the cryptocurrency with the `symbol` equal to "BTC"?**
+
+```{r btc-price, exercise=TRUE, exercise.eval=TRUE}
+hitBTC
+```
+
+```{r btc-price-hint}
+select(arrange(filter(hitBTC, symbol=='BTC'), desc(date_time_utc)), symbol, ask_1_price)
+```
+
+```{r quiz-btc}
+quiz(
+  question('What is the latest price for the cryptocurrency with the `symbol` equal to "BTC"?',
+    answer("11432.78"),
+    answer("1914.82"),
+    answer("8594.12"),
+    answer(toString(head(select(arrange(filter(hitBTC, symbol=='BTC'), desc(date_time_utc)),ask_1_price),1))[1], correct = TRUE)
+  )
+)
+```
+
+## Second Example Topic
+
+Try one more question. Can you find the value of `symbol` for the cryptocurrency with the lowest `ask_1_price` in the `hitBTC` dataset?
+
+```{r lowest-price, exercise=TRUE, exercise.eval=TRUE}
+hitBTC
+```
+
+```{r lowest-price-hint}
+hitBTC[which.min(hitBTC$ask_1_price),]$symbol
+```
+
+```{r lowest-price-solution}
+hitBTC[which.min(hitBTC$ask_1_price),]$symbol
+```
+
+
+```{r quiz-lowest-price}
+quiz(
+  question('Which cryptocurrency has the lowest value of "ask", for the entire dataset?',
+    answer("EOS"),
+    answer("BTC"),
+    answer(toString(hitBTC[which.min(hitBTC$ask_1_price),]$symbol), correct = TRUE),
+    answer("ETH")
+  )
+)
+```
