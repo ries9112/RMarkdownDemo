@@ -43,9 +43,6 @@ hitBTC
 head(hitBTC)
 ```
 
-```{r firstExercise-solution}
-head(hitBTC)
-```
 
 ### Quiz
 
@@ -83,11 +80,6 @@ hitBTC
 ```{r lowest-price-hint}
 hitBTC[which.min(hitBTC$ask_1_price),]$symbol
 ```
-
-```{r lowest-price-solution}
-hitBTC[which.min(hitBTC$ask_1_price),]$symbol
-```
-
 
 ```{r quiz-lowest-price}
 quiz(
