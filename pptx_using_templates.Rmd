@@ -1,0 +1,26 @@
+---
+title: "Using Powerpoint Templates"
+author: "April 2018"
+date: "4/9/2019"
+output: 
+  powerpoint_presentation:
+    reference_doc: presentation.pptx
+---
+
+
+# First Slide (important note)
+
+Can make powerpoint presentations using another presentation as a template, but [they must be setup correctly](https://stackoverflow.com/questions/57715758/modifying-existing-corporate-powerpoint-template-for-use-in-rmarkdown-could-not).
+
+## Subheader
+
+# Second Slide
+
+Another example slide.
+
+1. Example of a list
+
+2. Example
+
+3. ...
+
