@@ -1,0 +1,15 @@
+---
+title: "Untitled"
+author: "April 2018"
+date: "4/9/2019"
+output: 
+  powerpoint_presentation:
+    reference_doc: ppt_template.pptx
+---
+
+
+# Header
+
+## Second Header
+
+Can make powerpoint presentations using another presentation as a template (but [they must be setup correctly](https://stackoverflow.com/questions/57715758/modifying-existing-corporate-powerpoint-template-for-use-in-rmarkdown-could-not))
